@@ -1152,7 +1152,7 @@ mod tests {
         let mut mech = SequoiaMechanism::ephemeral().unwrap();
         let res = mech.import_keys(&[]);
         assert!(res.is_ok());
-        assert_eq!(res.unwrap().key_handles, []);
+        assert!(res.unwrap().key_handles.is_empty());
 
         // A valid import of multiple keys.
         let pk1 = &TEST_KEY[..];

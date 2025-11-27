@@ -251,7 +251,27 @@ dependencies = [
  "proc-macro2",
  "quote",
  "regex",
- "rustc-hash",
+ "rustc-hash 1.1.0",
+ "shlex",
+ "syn 2.0.106",
+]
+
+[[package]]
+name = "bindgen"
+version = "0.71.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5f58bf3d7db68cfbac37cfc485a8d711e87e064c3d0fe0435b92f7a407f9d6b3"
+dependencies = [
+ "bitflags 2.9.2",
+ "cexpr",
+ "clang-sys",
+ "itertools 0.13.0",
+ "log",
+ "prettyplease",
+ "proc-macro2",
+ "quote",
+ "regex",
+ "rustc-hash 2.1.1",
  "shlex",
  "syn 2.0.106",
 ]
@@ -437,6 +457,15 @@ name = "cast5"
 version = "0.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "26b07d673db1ccf000e90f54b819db9e75a8348d6eb056e9b8ab53231b7a9911"
+dependencies = [
+ "cipher",
+]
+
+[[package]]
+name = "cbc"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "26b52a9543ae338f279b96b0b9fed9c8093744685043739079ce85cd58f289a6"
 dependencies = [
  "cipher",
 ]
@@ -913,9 +942,9 @@ dependencies = [
 
 [[package]]
 name = "dlwrap"
-version = "0.3.8"
+version = "0.3.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "98b05d42090b0a96231ada2e4bde44edc3c98e1b78c2604570e0e9656fde54d2"
+checksum = "38c0171a5dd7dd42504211aa4500bf9fdcdd71a63bc51f25d8ddb9e68c73bfb7"
 dependencies = [
  "anyhow",
  "clang",
@@ -1154,21 +1183,6 @@ dependencies = [
  "crc32fast",
  "miniz_oxide",
 ]
-
-[[package]]
-name = "foreign-types"
-version = "0.3.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f6f339eb8adc052cd2ca78910fda869aefa38d22d5cb648e6485e4d3fc06f3b1"
-dependencies = [
- "foreign-types-shared",
-]
-
-[[package]]
-name = "foreign-types-shared"
-version = "0.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "00b0228411908ca8685dba7fc2cdd70ec9990a6e753e89b6ac91a84c40fbaf4b"
 
 [[package]]
 name = "form_urlencoded"
@@ -1878,7 +1892,7 @@ version = "2.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "61a3f5406064d310d59b1a219d3c5c9a49caf4047b6496032e3f930876488c34"
 dependencies = [
- "bindgen",
+ "bindgen 0.70.1",
  "cc",
  "libc",
  "pkg-config",
@@ -2016,44 +2030,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "openssl"
-version = "0.10.73"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8505734d46c8ab1e19a1dce3aef597ad87dcb4c37e7188231769bd6bd51cebf8"
-dependencies = [
- "bitflags 2.9.2",
- "cfg-if",
- "foreign-types",
- "libc",
- "once_cell",
- "openssl-macros",
- "openssl-sys",
-]
-
-[[package]]
-name = "openssl-macros"
-version = "0.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a948666b637a0f465e8564c73e89d4dde00d72d4d473cc972f390fc3dcee7d9c"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 2.0.106",
-]
-
-[[package]]
-name = "openssl-sys"
-version = "0.9.109"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "90096e2e47630d78b7d1c20952dc621f957103f8bc2c8359ec81290d75238571"
-dependencies = [
- "cc",
- "libc",
- "pkg-config",
- "vcpkg",
-]
-
-[[package]]
 name = "option-ext"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2064,6 +2040,19 @@ name = "os_str_bytes"
 version = "6.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e2355d85b9a3786f481747ced0e0ff2ba35213a1f9bd406ed906554d7af805a1"
+
+[[package]]
+name = "ossl"
+version = "1.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9904e51904eb47d8e09951565bdc36a684eb5dc699b438ad394bec211d539c54"
+dependencies = [
+ "bindgen 0.71.1",
+ "cfg-if",
+ "getrandom 0.3.3",
+ "libc",
+ "pkg-config",
+]
 
 [[package]]
 name = "p256"
@@ -2288,6 +2277,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "925383efa346730478fb4838dbe9137d2a47675ad789c546d150a6e1dd4ab31c"
 
 [[package]]
+name = "prettyplease"
+version = "0.2.37"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "479ca8adacdd7ce8f1fb39ce9ecccbfe93a3f1344b3d0d97f20bc0196208f62b"
+dependencies = [
+ "proc-macro2",
+ "syn 2.0.106",
+]
+
+[[package]]
 name = "primeorder"
 version = "0.13.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2496,6 +2495,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "08d43f7aa6b08d49f382cde6a7982047c3426db949b1424bc4b7ec9ae12c6ce2"
 
 [[package]]
+name = "rustc-hash"
+version = "2.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "357703d41365b4b27c590e3ed91eabb1b663f07c4c084095e60cbed4362dff0d"
+
+[[package]]
 name = "rustc_version"
 version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2579,13 +2584,13 @@ checksum = "56e6fa9c48d24d85fb3de5ad847117517440f6beceb7798af16b4a87d616b8d0"
 
 [[package]]
 name = "sequoia-cert-store"
-version = "0.7.0"
+version = "0.8.0-pqc.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cc8987ed37e9931aee509c7ebc10e93b2ee5862849546c8a0c4588f3ed670b74"
+checksum = "b97ff5b0bf1b8e0cb5823efb78e975042a45b41ed25f9c688dd258e7040155b6"
 dependencies = [
  "anyhow",
  "crossbeam",
- "dirs 5.0.1",
+ "dirs 6.0.0",
  "gethostname",
  "num_cpus",
  "openpgp-cert-d",
@@ -2612,12 +2617,13 @@ dependencies = [
 
 [[package]]
 name = "sequoia-ipc"
-version = "0.36.0"
+version = "0.37.0-pqc.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c92579bbd37f62bbcc41e4dce7771fea395037bebaf9b8e10c20b765be8280ab"
+checksum = "d835f3e96d709b91a5390cb88946f56818690c642d576ab93775e6ce21185786"
 dependencies = [
  "anyhow",
  "capnp-rpc",
+ "capnpc",
  "ctor",
  "dirs 5.0.1",
  "fs2",
@@ -2637,15 +2643,15 @@ dependencies = [
 
 [[package]]
 name = "sequoia-keystore"
-version = "0.7.0"
+version = "0.8.0-pqc.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b510811048c0767a0d3196b3bb0719d999eb52a836580d794e97a2586b546347"
+checksum = "2946d66a0fa980a7b3885fe27b5cc683cbf3841fb9d5da2f4f0499c84c86c299"
 dependencies = [
  "anyhow",
  "async-generic",
  "capnp",
  "capnpc",
- "dirs 5.0.1",
+ "dirs 6.0.0",
  "env_logger",
  "log",
  "paste",
@@ -2661,9 +2667,9 @@ dependencies = [
 
 [[package]]
 name = "sequoia-keystore-backend"
-version = "0.7.0"
+version = "0.8.0-pqc.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c55b047f9b6412c34dc7a26a42f278205cbf1e29516feab1228edccca215f500"
+checksum = "e994abb76d1741362c2e9b0255a971bf954527b89fdb45164f2ddebbfbcf8919"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -2678,13 +2684,13 @@ dependencies = [
 
 [[package]]
 name = "sequoia-keystore-softkeys"
-version = "0.7.0"
+version = "0.8.0-pqc.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "713736e9a5277f8ff829a1efaf99c0f6c07718fe0c199f435406883313ee8742"
+checksum = "6518f7ad42f09bccaafa1449782f7b4a9fc5b53f65da81fd175a9f37463ac818"
 dependencies = [
  "anyhow",
  "async-trait",
- "dirs 5.0.1",
+ "dirs 6.0.0",
  "futures",
  "log",
  "sequoia-keystore-backend",
@@ -2693,9 +2699,9 @@ dependencies = [
 
 [[package]]
 name = "sequoia-openpgp"
-version = "2.0.0"
+version = "2.2.0-pqc.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "015e5fc3d023418b9db98ca9a7f3e90b305872eeafe5ca45c5c32b5eb335c1e8"
+checksum = "8ccdd22ae5d454527f1c421308883bc5174bc9e52f933e889e9c65a74b42c4a3"
 dependencies = [
  "aes",
  "aes-gcm",
@@ -2709,6 +2715,7 @@ dependencies = [
  "bzip2",
  "camellia",
  "cast5",
+ "cbc",
  "cfb-mode",
  "chrono",
  "cipher",
@@ -2734,8 +2741,7 @@ dependencies = [
  "nettle",
  "num-bigint-dig",
  "ocb3",
- "openssl",
- "openssl-sys",
+ "ossl",
  "p256",
  "p384",
  "p521",
@@ -2759,9 +2765,9 @@ dependencies = [
 
 [[package]]
 name = "sequoia-policy-config"
-version = "0.8.0"
+version = "0.9.0-pqc.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8e016b708d64857b6a97e1a331d9471b73e30ed450d247628e1a0ce236b1e597"
+checksum = "163de26bacd743e289317c9374ca1c65a9291d1e1bff93f1959b2f5a09c4b9c4"
 dependencies = [
  "anyhow",
  "chrono",

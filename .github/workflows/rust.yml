@@ -36,6 +36,8 @@ jobs:
         git branch fedora/42/x86_64 origin/fedora/42/x86_64
     - name: Build
       run: cargo build --verbose
+    - name: Check that the working directory is clean
+      run: test -z $(git status --porcelain --untracked-files=no) || exit 1
     - name: Check ABI compatibility
       run: abidb --loglevel debug --sysroot target/debug --check target/debug/libpodman_sequoia.so.0
     - name: Run Rust tests

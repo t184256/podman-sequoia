@@ -41,6 +41,6 @@ jobs:
     - name: Check ABI compatibility
       run: abidb --loglevel debug --sysroot target/debug --check target/debug/libpodman_sequoia.so.0
     - name: Run Rust tests
-      run: cargo test --verbose
+      run: SEQUOIA_CRYPTO_POLICY=/dev/null cargo test --verbose
     - name: Run Go tests
       run: make -C go check
